@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Language Solutions</title>
+    <link rel="manifest" href="/languagesolutionsa2/manifest.json" />
+    <link rel="stylesheet" href="/languagesolutionsa2/style.css" />
+    <meta name="theme-color" content="#1976d2" />
+</head>
+<body>
+    <div id="app-container" class="pantalla-oculta">
+        <header>
+            <button id="btn-logout" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+                Cerrar Sesión
+            </button>
+            <p id="puntos">Puntos totales: 0</p>
+            <button id="btn-reiniciar-puntos">Reiniciar puntos</button>
+            <button id="btn-ver-historial">Ver historial</button>
+        </header>
+
+        <section id="pantalla-lecciones" class="pantalla pantalla-oculta">
+            <h2>Selecciona una lección</h2>
+            <div id="lecciones-container" class="grid"></div>
+        </section>
+
+        <section id="pantalla-actividades" class="pantalla pantalla-oculta">
+            <h2 id="titulo-leccion"></h2>
+            <h3>Selecciona una actividad</h3>
+            <div id="actividades-container" class="grid"></div>
+        </section>
+
+        <section id="pantalla-actividad" class="pantalla pantalla-oculta">
+            <h2 id="titulo-actividad"></h2>
+            <div id="actividad-juego"></div>
+            <button id="btn-volver-lecciones" class="btn-volver">Volver a Lecciones</button>
+            <button class="btn-volver" id="btn-volver-actividades">Volver a actividades</button>
+            <div id="mensaje-feedback" style="font-weight:bold; text-align:center; margin-top:1rem;"></div>
+        </section>
+
+        <section id="pantalla-lista-palabras" class="pantalla pantalla-oculta">
+            <h2 id="titulo-lista-leccion"></h2>
+            <div id="lista-palabras-container" style="margin-top: 1rem;"></div>
+            <div style="margin-top: 1.5rem;">
+                <button id="btn-ir-actividades" class="btn-volver">Ir a Actividades</button>
+                <button id="btn-volver-lista" class="btn-volver">Volver a Lecciones</button>
+            </div>
+        </section>
+
+        <div id="pantalla-historial" class="pantalla pantalla-oculta">
+            <h2>Historial de puntuaciones</h2>
+            <div id="historial-container"></div>
+            <button id="btn-salir-historial">Volver</button>
+        </div>
+    </div>
+
+    <footer style="text-align:center; margin-top: 30px; font-size: 14px;">
+        developed by DGR
+    </footer>
+
+    <script src="palabras.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
