@@ -1,6 +1,6 @@
 // app.js
 // app.js
-const API_BASE_URL = 'https://ls-api-a1.vercel.app';
+const API_BASE_URL = 'https://ls-api-b1.vercel.app/';
 document.addEventListener("DOMContentLoaded", () => {
     // ---- LÓGICA DE AUTENTICACIÓN ----
     const token = localStorage.getItem('token');
@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-navigator.serviceWorker.register('/languagesolutionsa1/service-worker.js', {
-    scope: '/languagesolutionsa1/' // <-- ¡AÑADE/CORRIGE ESTA LÍNEA!
+navigator.serviceWorker.register('/languagesolutionsb1/service-worker.js', {
+    scope: '/languagesolutionsb1/' // <-- ¡AÑADE/CORRIGE ESTA LÍNEA!
 })
 // ... el resto de tu .then y .catch'
             
