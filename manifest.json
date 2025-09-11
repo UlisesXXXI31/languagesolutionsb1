@@ -1,14 +1,14 @@
 {
-  "name": "Language Solutions A1",
-  "short_name": "A1",
+  "name": "Language Solutions B1",
+  "short_name": "B1",
   "icons": [
     {
-      "src": "/languagesolutionsa1/android-chrome-192x192.png",
+      "src": "/languagesolutionsb1/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/languagesolutionsa1/android-chrome-512x512.png",
+      "src": "/languagesolutionsb1/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
