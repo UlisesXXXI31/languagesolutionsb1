@@ -16,9 +16,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Referencias a los elementos del DOM
-    const form = document.getElementById('form-add-student');
+    const studentForm = document.getElementById('form-add-student');
     const studentNameInput = document.getElementById('student-name');
     const studentEmailInput = document.getElementById('student-email');
+
+    const teacherForm = document.getElementById('form-add-teacher');
+    const teacherNameInput = document.getElementById('teacher-name');
+    const teacherEmailInput = document.getElementById('teacher-email');
+    
     const statusMessage = document.getElementById('status-message');
     const studentListContainer = document.getElementById('student-list');
     const studentProgressSection = document.getElementById('student-progress');
@@ -138,10 +143,62 @@ document.addEventListener('DOMContentLoaded', async () => {
         studentListContainer.style.display = 'block';
     });
 
-    // Evento para añadir un nuevo alumno al enviar el formulario
-    // REEMPLAZA LA FUNCIÓN COMPLETA DEL FORMULARIO CON ESTA
+// Evento para añadir un nuevo profesor al enviar el formulario
 
-form.addEventListener('submit', async (e) => {
+teacherForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = teacherNameInput.value;
+    const email = teacherEmailInput.value;
+    const password =  generateRandomPassword() ;
+    statusMessage.textContent = "Añadiendo alumno...";
+    statusMessage.style.color = "black";
+
+    if (!email.endsWith('@europaschool.org')) {
+        statusMessage.textContent = "Error: El correo debe terminar en @europaschool.org";
+        statusMessage.style.color = "red";
+        return;
+    }
+
+    try {
+        // NOTA: Tu API para registrar un usuario es '/api/users/register'.
+        // He corregido la ruta aquí también.
+        const response = await fetch(`${API_BASE_URL}/api/users/register`, { 
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ name, email, password, role: 'teacher' })
+        });
+        
+        const data = await response.json();
+
+        if (response.ok) {
+            // La respuesta de tu API de registro no devuelve data.user.name,
+            // así que usamos el nombre que ya tenemos.
+            statusMessage.textContent = `¡Alumno ${name} añadido con éxito!`;
+            statusMessage.style.color = "green";
+            
+            //alerta para mostrar la contraseña temporal
+             alert(`¡Importante! La contraseña temporal para ${name} es: ${password}`);
+            
+            teacherForm.reset();
+            
+        } else {
+            statusMessage.textContent = `Error al añadir alumno: ${data.message}`;
+            statusMessage.style.color = "red";
+        }
+    } catch (error) { // <-- ESTE ES EL BLOQUE QUE FALTABA
+        statusMessage.textContent = "Error de red. Intenta de nuevo más tarde.";
+        statusMessage.style.color = "red";
+        console.error("Error:", error);
+    }
+});
+    
+    // Evento para añadir un nuevo alumno al enviar el formulario
+   
+
+studentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = studentNameInput.value;
     const email = studentEmailInput.value;
@@ -178,7 +235,7 @@ form.addEventListener('submit', async (e) => {
             //alerta para mostrar la contraseña temporal
              alert(`¡Importante! La contraseña temporal para ${name} es: ${password}`);
             
-            form.reset();
+            studentForm.reset();
             await fetchAndDisplayStudents(); // Refresca la lista de alumnos
         } else {
             statusMessage.textContent = `Error al añadir alumno: ${data.message}`;
@@ -189,7 +246,11 @@ form.addEventListener('submit', async (e) => {
         statusMessage.style.color = "red";
         console.error("Error:", error);
     }
-});
+
+// Carga inicial de los alumnos
+    fetchAndDisplayStudents();
+});  
+   
     // Función para generar una contraseña aleatoria de 8 caracteres
 function generateRandomPassword() {
   const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -200,6 +261,4 @@ function generateRandomPassword() {
   return password;
 }
 
-    // Carga inicial de los alumnos
-    fetchAndDisplayStudents();
 });
