@@ -176,11 +176,11 @@ teacherForm.addEventListener('submit', async (e) => {
         if (response.ok) {
             // La respuesta de tu API de registro no devuelve data.user.name,
             // así que usamos el nombre que ya tenemos.
-            statusMessage.textContent = `¡Alumno ${name} añadido con éxito!`;
+            statusMessage.textContent = `¡Profesor ${name} añadido con éxito!`;
             statusMessage.style.color = "green";
             
             //alerta para mostrar la contraseña temporal
-             alert(`¡Importante! La contraseña temporal para ${name} es: ${password}`);
+             alert(`¡Importante! La contraseña para ${name} es: ${password}`);
             
             teacherForm.reset();
             
