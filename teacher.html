@@ -55,6 +55,26 @@
     <h1>Panel de Control del Profesor</h1>
 
     <div class="form-container">
+        <h2>Añadir Nuevo Profesor</h2>
+        <form id="form-add-teacher">
+            <div class="input-group">
+                <label for="teacher-name">Nombre del Profesor:</label>
+                <input type="text" id="teacher-name" required>
+            </div>
+            <div class="input-group">
+                <label for="teacher-email">Correo Electrónico:</label>
+                <input type="email" id="teacher-email" required>
+            </div>
+            <div class="input-group">
+                <label for="teacher-role">rol:</label>
+                <input type="text" id="teacher-role" required>
+            </div>
+            <button type="submit" id="btn-add student">Añadir Profesor</button>
+        </form>
+        <div id="status-message"></div>
+    </div>
+
+    <div class="form-container">
         <h2>Añadir Nuevo Alumno</h2>
         <form id="form-add-student">
             <div class="input-group">
