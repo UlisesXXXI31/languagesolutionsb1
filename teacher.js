@@ -145,7 +145,7 @@ form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = studentNameInput.value;
     const email = studentEmailInput.value;
-    const password = 'password123';
+    const password =  generateRandomPassword() ;
     statusMessage.textContent = "Añadiendo alumno...";
     statusMessage.style.color = "black";
 
@@ -174,6 +174,10 @@ form.addEventListener('submit', async (e) => {
             // así que usamos el nombre que ya tenemos.
             statusMessage.textContent = `¡Alumno ${name} añadido con éxito!`;
             statusMessage.style.color = "green";
+            
+            //alerta para mostrar la contraseña temporal
+             alert(`¡Importante! La contraseña temporal para ${name} es: ${password}`);
+            
             form.reset();
             await fetchAndDisplayStudents(); // Refresca la lista de alumnos
         } else {
@@ -186,6 +190,15 @@ form.addEventListener('submit', async (e) => {
         console.error("Error:", error);
     }
 });
+    // Función para generar una contraseña aleatoria de 8 caracteres
+function generateRandomPassword() {
+  const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+  let password = "";
+  for (let i = 0; i < 8; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+}
 
     // Carga inicial de los alumnos
     fetchAndDisplayStudents();
