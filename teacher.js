@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const teacherNameInput = document.getElementById('teacher-name');
     const teacherEmailInput = document.getElementById('teacher-email');
     
-    const statusMessage = document.getElementById('status-message');
+    const studentStatusMessage = document.getElementById('status-message-student');
+    const teacherStatusMessage = document.getElementById('status-message-teacher');
+    
     const studentListContainer = document.getElementById('student-list');
     const studentProgressSection = document.getElementById('student-progress');
     const studentNameTitle = document.getElementById('student-name-title');
@@ -150,34 +152,34 @@ teacherForm.addEventListener('submit', async (e) => {
     const name = teacherNameInput.value;
     const email = teacherEmailInput.value;
     const password =  generateRandomPassword() ;
-    statusMessage.textContent = "Añadiendo alumno...";
-    statusMessage.style.color = "black";
+    teacherStatusMessage.textContent = "Añadiendo profesor...";
+    teacherStatusMessage.style.color = "black";
 
     if (!email.endsWith('@europaschool.org')) {
-        statusMessage.textContent = "Error: El correo debe terminar en @europaschool.org";
-        statusMessage.style.color = "red";
+        teacherStatusMessage.textContent = "Error: El correo debe terminar en @europaschool.org";
+        teacherStatusMessage.style.color = "red";
         return;
     }
 
     try {
-        // NOTA: Tu API para registrar un usuario es '/api/users/register'.
-        // He corregido la ruta aquí también.
+        // NOTA:  API para registrar un usuario 
+        
         const response = await fetch(`${API_BASE_URL}/api/users/register`, { 
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ name, email, password, role: 'teacher' })
+            body: JSON.stringify({ name, email, password, role: 'profesor' })
         });
         
         const data = await response.json();
 
         if (response.ok) {
-            // La respuesta de tu API de registro no devuelve data.user.name,
+            // La respuesta de la API de registro no devuelve data.user.name,
             // así que usamos el nombre que ya tenemos.
-            statusMessage.textContent = `¡Profesor ${name} añadido con éxito!`;
-            statusMessage.style.color = "green";
+            teacherStatusMessage.textContent = `¡Profesor ${name} añadido con éxito!`;
+            teacherStatusMessage.style.color = "green";
             
             //alerta para mostrar la contraseña temporal
              alert(`¡Importante! La contraseña para ${name} es: ${password}`);
@@ -185,12 +187,12 @@ teacherForm.addEventListener('submit', async (e) => {
             teacherForm.reset();
             
         } else {
-            statusMessage.textContent = `Error al añadir alumno: ${data.message}`;
-            statusMessage.style.color = "red";
+            teacherStatusMessage.textContent = `Error al añadir profesor: ${data.message}`;
+            teacherStatusMessage.style.color = "red";
         }
     } catch (error) { // <-- ESTE ES EL BLOQUE QUE FALTABA
-        statusMessage.textContent = "Error de red. Intenta de nuevo más tarde.";
-        statusMessage.style.color = "red";
+        teacherStatusMessage.textContent = "Error de red. Intenta de nuevo más tarde.";
+        teacherStatusMessage.style.color = "red";
         console.error("Error:", error);
     }
 });
@@ -203,12 +205,12 @@ studentForm.addEventListener('submit', async (e) => {
     const name = studentNameInput.value;
     const email = studentEmailInput.value;
     const password =  generateRandomPassword() ;
-    statusMessage.textContent = "Añadiendo alumno...";
-    statusMessage.style.color = "black";
+    studentStatusMessage.textContent = "Añadiendo alumno...";
+    studentStatusMessage.style.color = "black";
 
     if (!email.endsWith('@europaschool.org')) {
-        statusMessage.textContent = "Error: El correo debe terminar en @europaschool.org";
-        statusMessage.style.color = "red";
+        studentStatusMessage.textContent = "Error: El correo debe terminar en @europaschool.org";
+        studentStatusMessage.style.color = "red";
         return;
     }
 
@@ -221,7 +223,7 @@ studentForm.addEventListener('submit', async (e) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ name, email, password, role: 'student' })
+            body: JSON.stringify({ name, email, password, role: 'alumno' })
         });
         
         const data = await response.json();
@@ -229,8 +231,8 @@ studentForm.addEventListener('submit', async (e) => {
         if (response.ok) {
             // La respuesta de tu API de registro no devuelve data.user.name,
             // así que usamos el nombre que ya tenemos.
-            statusMessage.textContent = `¡Alumno ${name} añadido con éxito!`;
-            statusMessage.style.color = "green";
+            studentStatusMessage.textContent = `¡Alumno ${name} añadido con éxito!`;
+            studentStatusMessage.style.color = "green";
             
             //alerta para mostrar la contraseña temporal
              alert(`¡Importante! La contraseña temporal para ${name} es: ${password}`);
@@ -238,12 +240,12 @@ studentForm.addEventListener('submit', async (e) => {
             studentForm.reset();
             await fetchAndDisplayStudents(); // Refresca la lista de alumnos
         } else {
-            statusMessage.textContent = `Error al añadir alumno: ${data.message}`;
-            statusMessage.style.color = "red";
+            studentStatusMessage.textContent = `Error al añadir alumno: ${data.message}`;
+            studentStatusMessage.style.color = "red";
         }
     } catch (error) { // <-- ESTE ES EL BLOQUE QUE FALTABA
-        statusMessage.textContent = "Error de red. Intenta de nuevo más tarde.";
-        statusMessage.style.color = "red";
+        studentStatusMessage.textContent = "Error de red. Intenta de nuevo más tarde.";
+        studentStatusMessage.style.color = "red";
         console.error("Error:", error);
     }
 
