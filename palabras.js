@@ -1349,8 +1349,7 @@ m{aleman: "der Gegenstand", espanol: "el objeto"},
 {aleman: "die Überlegung", espanol: "la consideración (la reflexión)"},
 {aleman: "aufwendig", espanol: "costoso/a (en tiempo/esfuerzo)"}
 ]
-    }
+    },
                
-    }
   ]
 };
