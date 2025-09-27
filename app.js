@@ -1,5 +1,4 @@
 // app.js
-// app.js
 const API_BASE_URL = 'https://ls-api-b1.vercel.app';
 document.addEventListener("DOMContentLoaded", () => {
     // ---- LÓGICA DE AUTENTICACIÓN ----
@@ -54,12 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const sonidoCorrcto = new Audio("audios/correcto.mp3");
     const sonidoIncorrecto = new Audio("audios/incorrecto.mp3");
 
-   // Registro del Service Worker
+     // Registro del Service Worker
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-navigator.serviceWorker.register('/languagesolutionsb1/service-worker.js', {
-    scope: '/languagesolutionsb1/' // <-- ¡AÑADE/CORRIGE ESTA LÍNEA!
+navigator.serviceWorker.register('/languagesolutionsa1/service-worker.js', {
+    scope: '/languagesolutionsa1/' // <-- ¡AÑADE/CORRIGE ESTA LÍNEA!
 })
 // ... el resto de tu .then y .catch'
             
@@ -115,7 +114,6 @@ registerServiceWorker();
     // Lógica de cerrar sesión
     if (btnLogout) {
         btnLogout.addEventListener('click', () => {
-            console.log("Botón 'Cerrar Sesión' pulsado. Llamando a guardar puntuación...");
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             localStorage.removeItem('userData');
@@ -208,7 +206,6 @@ registerServiceWorker();
 
     if (btnVolverLecciones) {
         btnVolverLecciones.addEventListener("click", () => {
-            console.log("Botón 'Volver a Lecciones' pulsado. Llamando a guardar puntuación...");
             guardarPuntuacionEnHistorial();
             mostrarPantalla("pantalla-lecciones");
             mostrarLecciones();
@@ -337,8 +334,6 @@ console.log("Enviando datos de progreso con 'completed' dinámico:", progressDat
         localStorage.setItem("historialPuntos", JSON.stringify(historial));
         puntosUltimaSesion = puntos;
     }
-
-
     function mostrarHistorial() {
         const historialContainer = document.getElementById("historial-container");
         if (!historialContainer) return;
@@ -440,7 +435,7 @@ console.log("Enviando datos de progreso con 'completed' dinámico:", progressDat
         }
     }
 
-    // Código de la actividad "Emparejar"
+      // Código de la actividad "Emparejar"
     let emparejarPalabras = [];
     let emparejarPares = [];
     let emparejarSeleccionados = [];
